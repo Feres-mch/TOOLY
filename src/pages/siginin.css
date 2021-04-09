@@ -1,0 +1,14 @@
+
+  
+  .login,
+  .image {
+    min-height: 100vh;
+  }
+  
+  .bg-image {
+    background-image: url('../images/backgroundSignIn.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  

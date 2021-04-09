@@ -1,0 +1,15 @@
+
+.cardProfil{
+
+    -webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+    box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.671);
+    border: none;
+    margin-bottom: 30px;
+    left : 0px !important;
+    height: 100%;
+}
+.card-pic{
+    background: linear-gradient(to right, #FFC312, #ffe550);
+    height: 100%;
+
+}

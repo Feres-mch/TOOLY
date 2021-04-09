@@ -1,0 +1,152 @@
+.App {
+  text-align: center;
+}
+.header
+{
+    border-bottom: 2px solid #4AA0D8;
+    background-color: rgba(17, 165, 169, 0.5);
+}
+
+.header li a
+{
+    text-decoration: none;
+    color:white;
+}
+ li a:hover
+{
+    text-decoration: none;
+    color:yellow;
+    font-weight: 700;
+}
+html {
+    scroll-behavior: smooth;
+   }
+   
+   a {
+    text-decoration: none;
+    color: black;
+   } 
+   body{
+background-color: white;
+   }
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.bg_image{
+  background-image: url('./images/contactUs.jpg');
+  background-size: cover;
+}
+.vertical-line {
+  display: inline-block;
+  height: 8px;
+  width: 55px;
+  border-top: 2px solid #fff;
+}
+.vertical-line2 {
+  display: inline-block;
+  height: 8px;
+  width: 300px;
+  border-top: 2px solid black;
+}
+.input-group {
+  position: relative;
+  display: table;
+  border-collapse: separate;
+}
+.center-box {
+  float: none;
+  margin: 0 auto;
+}
+.input-with-icon {
+  position: relative;
+}
+.inputNumb {
+  background-color: #f1f1f3;
+  background-image: url('https://cdn.bitdegree.org/learn/search-icon.png?229dfb2d');
+  background-size: 20px;
+  background-position: 3px 3px;
+  background-repeat: no-repeat;
+  padding-left: 30px;
+  padding-top: 5px;
+  padding-bottom: 5px;  
+}
+@media only screen and (min-width: 1024px) {
+  .container header .header-nav-area #nav_container  {
+    display:flex;
+  }
+}
+.icon:hover {
+  transform:scale(1.1, 1.1);
+  
+}
+
+
+.PoductBox{
+background-color:#333333;
+width: 250px;
+
+text-align: center;
+margin: 20px;
+
+box-shadow: 2px 2px 2px black;
+}
+.reviewBox{
+  background-color:#333333;
+  width: 250px;
+  height: 200px;
+
+  align-self: center;
+  align-items: center;
+  margin: 20px;
+  
+  box-shadow: 2px 2px 2px black;
+  }
+
+  
+.PoductBox:hover {
+    transform:scale(1.1, 1.1);
+}
+.reviewBox:hover {
+  transform:scale(1.1, 1.1);
+}
+.YellowBox {
+  text-align: center;
+  display: flex;
+  border: "none";
+  background-color: #fabb0c;
+  
+  border-radius: 5px;
+  padding: 50px;
+  
+  }
