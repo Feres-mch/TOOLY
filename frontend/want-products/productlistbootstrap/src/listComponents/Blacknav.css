@@ -1,0 +1,26 @@
+.blacknav {
+  background-color: black;
+  height: 60px;
+  color: #ffffff;
+}
+.brand-name {
+  display: inline-block;
+  margin-left: 10px;
+  margin-bottom: 12px;
+  color: #ffffff;
+}
+a {
+  margin-left: 10px;
+  margin-right: 10px;
+  color: #ffffff;
+}
+a:link {
+  text-decoration: none;
+}
+a:link {
+  color: rgb(255, 255, 255);
+}
+
+a:hover {
+  color: rgb(255, 166, 0);
+}

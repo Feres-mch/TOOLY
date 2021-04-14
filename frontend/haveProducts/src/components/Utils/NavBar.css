@@ -1,0 +1,20 @@
+.brand-name {
+  display: inline-block;
+  margin-top: 10%;
+  margin-left: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.search-bar {
+  width: 40%;
+}
+
+.navbar-buttons {
+  width: 200px;
+  box-shadow: 0 8px 6px -6px black;
+}
+
+.navbar-buttons:hover {
+  transform: scale(1.1);
+}

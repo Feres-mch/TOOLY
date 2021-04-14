@@ -1,0 +1,59 @@
+.conteneur {
+  margin-top: 5px;
+}
+
+h2 {
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.bt {
+  margin-right: 15px;
+}
+
+.btnn {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.circle-icon-select {
+  background: #fbbb0c;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 50px;
+  vertical-align: middle;
+  padding: 10px;
+}
+.circle-icon {
+  background: grey;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 50px;
+  vertical-align: middle;
+  padding: 5px;
+}
+.vertical-line2 {
+  display: inline-block;
+  height: 8px;
+  width: 100px;
+  border-top: 2px solid;
+}
+
+td,
+th {
+  vertical-align: middle;
+}
+
+.tdd {
+  text-align: center;
+}
+
+h4 {
+  margin: 2rem 0rem 1rem;
+}

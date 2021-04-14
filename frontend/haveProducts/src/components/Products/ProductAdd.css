@@ -1,0 +1,64 @@
+.formulaire {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5%;
+}
+
+.form-first-part {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(230, 223, 223);
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 48%;
+  border: 2px solid #fbbb0c;
+  box-shadow: 0 8px 6px -6px black;
+}
+
+.form-second-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 48%;
+}
+
+.form-sedonc-part-sub-one {
+  background-color: rgb(230, 223, 223);
+  width: 100%;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border: 2px solid #fbbb0c;
+  box-shadow: 0 8px 6px -6px black;
+}
+
+.form-sedonc-part-sub-two {
+  margin-top: auto;
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+}
+
+.buttons {
+  width: 250px;
+  box-shadow: 0 8px 6px -6px black;
+}
+
+.buttons:hover {
+  transform: scale(1.1);
+}
+
+.image-formulaire-container {
+  margin-top: 10px;
+  min-width: 200px;
+  min-height: 200px;
+  margin-bottom: 10px;
+}
+
+.image-formulaire {
+  width: 100%;
+  height: auto;
+}

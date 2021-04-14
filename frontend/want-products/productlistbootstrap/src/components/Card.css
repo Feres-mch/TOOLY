@@ -1,0 +1,19 @@
+.card123 {
+  background-color: #8f8f8f;
+  border: 5px solid;
+  color: #ffffff;
+  margin: 10px;
+  box-shadow: 0px 8px 6px -6px #000000;
+}
+
+.listbtn {
+  border-radius: 20px;
+  align-self: center;
+  align-content: center;
+  align-items: center;
+  box-shadow: 0px 8px 6px -6px #000000;
+}
+.listbtn:hover {
+  background-color: black;
+  color: #fbbb0c;
+}
