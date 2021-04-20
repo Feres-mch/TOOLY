@@ -1,92 +1,122 @@
-import React from "react";
-
+import React, { useContext } from "react";
+import * as Icon from 'react-bootstrap-icons';
 
 //import $ from 'jquery';
 import './headers.css';
+import AuthContext, { AuthContextProvider } from "./testAuth";
+import axios from 'axios';
 const Header = () => {
-    return (
-        <section class="navbar-dark  ">
-           <div class="container">
-              <div class="row">
-               <div class="col-sm-12"> 
-                <nav class="navbar navbar-expand-lg ">
-                  <a class="navbar-brand text-white" href="/"><h2>TOOLY</h2></a>
-                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-    
-                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                      <li class="nav-item ">
-                        <a class="nav-link text-white " href="#about">HOME<span class="sr-only">(current)</span></a>
-                      </li>
-                      
-                     
-                      
-                    </ul>
-                    <ul>
-                    <li class="nav-item">
-                        <a class="nav-link text-white " href="#tourist">I HAVE<span class="sr-only">(current)</span></a>
-                      </li>
-                      <li class="nav-item" >
-                        <a class="nav-link text-white " href="#tourist">I WANT<span class="sr-only">(current)</span></a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link text-white " href="#tourist">CONTACT<span class="sr-only">(current)</span></a>
-                      </li>
-                     
-                    <li class="nav-item" style={{float:"right"}} >
-                        <a class="nav-link text-white " href="/SignInPage">SIGN IN<span class="sr-only">(current)</span></a>
-                      </li>
-                      <li class="nav-item"  style={{float:"right"}}>
-                        <a class="nav-link  text-white" href="/SignUpPage">SIGN UP<span class="sr-only">(current)</span></a>
-                      </li>
-                    </ul>
-                  </div>
-                 </nav>
-                </div>
-              </div>
-            </div>
-        </section> 
-      );
-    /*return (
+  const loggedIn = useContext(AuthContext);
+  console.log(loggedIn.loggedIn);
+let log = loggedIn.loggedIn;
+console.log ("log is  : "+log);
 
+  function logout(){
+    alert("logout");
+    axios.get("http://localhost:5000/api/users/logout").then(resp => {
+      alert(resp);
 
-        <nav className="navbar navbar-expand-lg navbar-mainbg">
+  });
 
-            <div
-                className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav ml-auto text-center">
+  }
+  return (
+    <section className="navbar-dark  ">
+      <div className="container">
+        <div className="row">
+          <div className="col-sm-12">
+            <nav className="navbar navbar-expand-lg ">
 
-                 
+              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+              </button>
 
-                    <li className="nav-item ">
-                        <NavLink className="nav-link" to="/" exact>
-                        <img src={logo} style={{ width: "30%", height: "30%", }} alt="" />
-                        </NavLink>
-                    </li>
-                    <li className="nav-item">
+              <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul className="navbar-nav mr-auto">
+                  <li className="nav-item ">
+                    <Icon.HouseDoor size={60} style={{ color: "white", paddingBottom: "20px",  }} />
 
-                        <input icon="search" style={{ marginTop: "20px" ,float: "left", textAlign: "center"}} class="col-md" />
+                  </li>
 
-                    </li>
-                    <li className="nav-item" style={{float:"right"}}>
-                        <NavLink className="nav-link" to="/SignUpPage" exact>
-                            Sign Up
-                        </NavLink>
-                    </li>
-
-                    <li className="nav-item" style={{float:"right"}}>
-                        <NavLink className="nav-link" to="/SignInPage" exact>
-                            Sign In
-                        </NavLink>
-                    </li>
 
 
                 </ul>
-            </div>
-        </nav>
-    );*/
+                <ul>
+                  <li className="nav-item">
+                    <a className="nav-link text-white " href="#tourist">OWNED EQUIPEMENTS<span className="sr-only">(current)</span></a>
+                  </li>
+                  <li className="nav-item" >
+                    <a className="nav-link text-white " href="#tourist">WANTED EQUIPEMENTS<span className="sr-only">(current)</span></a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link text-white " href="#tourist">CONTACT<span className="sr-only">(current)</span></a>
+                  </li>
+                {!log &&(
+                  <>
+                      <li className="nav-item" style={{ float: "right" }} >
+                        <a className="nav-link text-white " href="/SignInPage">SIGN IN<span className="sr-only">(current)</span></a>
+                      </li>
+                      <li className="nav-item" style={{ float: "right" }}>
+                        <a className="nav-link  text-white" href="/SignUpPage">SIGN UP<span className="sr-only">(current)</span></a>
+                      </li>
+                      </>
+                )}
+                     {log &&(
+                  <>
+                      <li className="nav-item" style={{ float: "right" }} >
+                        <a className="nav-link text-white " onClick={logout} href="/SignInPage">LOG OUT<span className="sr-only">(current)</span></a>
+                      </li>
+                      <li className="nav-item" style={{ float: "right" }} >
+                        <a className="nav-link text-white " href="/profil">PROFIL<span className="sr-only">(current)</span></a>
+                      </li>
+                      </>
+                     )}
+
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+  /*return (
+
+
+      <nav classNameName="navbar navbar-expand-lg navbar-mainbg">
+
+          <div
+              classNameName="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul classNameName="navbar-nav ml-auto text-center">
+
+               
+
+                  <li classNameName="nav-item ">
+                      <NavLink classNameName="nav-link" to="/" exact>
+                      <img src={logo} style={{ width: "30%", height: "30%", }} alt="" />
+                      </NavLink>
+                  </li>
+                  <li classNameName="nav-item">
+
+                      <input icon="search" style={{ marginTop: "20px" ,float: "left", textAlign: "center"}} className="col-md" />
+
+                  </li>
+                  <li classNameName="nav-item" style={{float:"right"}}>
+                      <NavLink classNameName="nav-link" to="/SignUpPage" exact>
+                          Sign Up
+                      </NavLink>
+                  </li>
+
+                  <li classNameName="nav-item" style={{float:"right"}}>
+                      <NavLink classNameName="nav-link" to="/SignInPage" exact>
+                          Sign In
+                      </NavLink>
+                  </li>
+
+
+              </ul>
+          </div>
+      </nav>
+  );*/
 }
 
 export default Header;

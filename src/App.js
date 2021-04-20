@@ -15,11 +15,18 @@ import SignInPage from"./pages/SignInPage";
 import SignUpPage from"./pages/SignUpPage";
 import SignUpPage2 from"./pages/SignUpPage2";
 import SignUpPage3 from"./pages/SignUpPage3";
-import ProfilPage from"./pages/profilPage";
 
+import Profil from"./pages/profil";
+import Editpage from"./pages/editprofil";
+
+import Forgotpassword from "./pages/forgotPassword";
+import axios from "axios";
 import './App.css';
+import { AuthContextProvider } from "./components/testAuth";
+axios.defaults.withCredentials = true;
 const App = () => {
   return (
+    <AuthContextProvider>
    <Router>
     <Header1/>
     <Header/>
@@ -30,15 +37,21 @@ const App = () => {
           <Home/>
           <Footer/>
         </Route>
-        <Route path="/SignInPage" exact>
-          <SignInPage/>
+        <Route path="/SignInPage" render={(props) =>  <SignInPage {...props} />}>
+          
         </Route>
         <Route path="/SignUpPage" render={(props) =>  <SignUpPage {...props} />}>
          
         </Route>
-        <Route path="/profil" ender={(props) =>  <ProfilPage {...props} />}>
-      
+        <Route path="/profil" render={(props) =>  <Profil {...props} />}>
+         
         </Route>
+        <Route path="/editpage" render={(props) =>  <Editpage {...props} />}>
+         
+         </Route>
+         <Route path="/forg-password/:email" render={(props) =>  <Forgotpassword {...props} />}>
+         
+         </Route>
         <Route path="/SignUpPage2" render={(props) =>  <SignUpPage2 {...props} />}>
           
          
@@ -46,48 +59,14 @@ const App = () => {
         <Route path="/SignUpPage3" render={(props) =>  <SignUpPage3 {...props} />}>
         
         </Route>
+       
         <Redirect to="/" />
       </Switch>
     </main>
     
    </Router>
+   </AuthContextProvider>
   );
 }
 
 export default App;
-/*function App() {
-  return (
-    <>
-      <Header></Header>
-      
-      <AppFrame className="App">
-        <BrowserRouter basename="/">
-          <Switch>
-           
-            <Route
-              path="/signinpage"
-              render={(props) => <SignInPage  />}
-            ></Route>
-             <Route
-              path="/signUppage"
-              render={(props) => <SignUpPage  />}
-            ></Route>
-           <Route
-              path="/"
-              render={(props) => <Home  />}
-            ></Route>
-            <Route exact render={() => <p>Default rendered page!</p>}></Route>
-          </Switch>
-        </BrowserRouter>
-      </AppFrame>
-    </>
-  );
-}
-
-const AppFrame = styled.div`
-text-align: center;
-display: flex;
-flex-direction: column;
-`;
-export default App;
-*/

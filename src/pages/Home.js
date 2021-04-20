@@ -22,47 +22,47 @@ export default class Home extends Component {
     render() {
         return (
             <>
-                <section class="">
-                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img class="d-block w-100" src={logo} alt="First slide" style={{ height: "50%" }} />
+                <section className="">
+                    <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel">
+                        <div className="carousel-inner">
+                            <div className="carousel-item active">
+                                <img className="d-block w-100" src={logo} alt="First slide" style={{ height: "50%" }} />
                             </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100 " src={logo2} alt="Second slide" style={{ height: "50%" }} />
+                            <div className="carousel-item">
+                                <img className="d-block w-100 " src={logo2} alt="Second slide" style={{ height: "50%" }} />
                             </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src={logo3} alt="Third slide" style={{ height: "50%" }} />
+                            <div className="carousel-item">
+                                <img className="d-block w-100" src={logo3} alt="Third slide" style={{ height: "50%" }} />
                             </div>
                         </div>
                     </div>
                 </section>
 
                 <br />
-                <section class="bg-light" id="about">
-                    <div class="container-fluid YellowBox">
-                        <div class="row">
-                            <div class="offset-4 col-sm-12 col-md-12">
-                                <img src={gardening} class="icon" alt="" />
-                                <img src={plombry}  class="icon" alt="" />
-                                <img src={Dockyard}  class="icon" alt="" />
-                                <img src={electricity} class="icon" alt="" />
-                                <img src={painting}  class="icon" alt="" />
+                <section className="bg-light" id="about">
+                    <div className="container-fluid YellowBox">
+                        <div className="row">
+                            <div className="offset-4 col-sm-12 col-md-12">
+                                <img src={gardening} className="icon" alt="" />
+                                <img src={plombry}  className="icon" alt="" />
+                                <img src={Dockyard}  className="icon" alt="" />
+                                <img src={electricity} className="icon" alt="" />
+                                <img src={painting}  className="icon" alt="" />
 
                             </div>
-                            <div class="offset-4 "></div>
+                            <div className="offset-4 "></div>
                         </div>
                     </div>
                 </section>
 
                 <br />
 
-                <h3 class=" col-sm-4 col-md-12" style={{ textAlign: 'center', }}> <span class="vertical-line2"></span>OUR MOST LOANED PRODUCTS ON OUR PLATFORM <span class="vertical-line2" ></span></h3>
+                <h3 className=" col-sm-4 col-md-12" style={{ textAlign: 'center', }}> <span className="vertical-line2"></span>OUR MOST LOANED PRODUCTS ON OUR PLATFORM <span className="vertical-line2" ></span></h3>
 
                 <section id="about">
-                    <div class="container-fluid ">
-                        <div class="row" >
-                            <div class="offset-md-2 col-sm-12 col-md-4" style={{ marginLeft: '50px' }} className="PoductBox">
+                    <div className="container-fluid ">
+                        <div className="row" >
+                            <div className="offset-md-2 col-sm-12 col-md-4" style={{ marginLeft: '50px' }} classNameName="PoductBox">
                                 <img src={prod1} style={{ width: '250px', }} alt="" />
                                 <hr style={{ width: '180px', color: 'yellow' }} />
                                 <p style={{ color: 'white' }}>Name : Drill</p>
@@ -72,7 +72,7 @@ export default class Home extends Component {
                                 <Button style={Butt}> Show More</Button>
 
                             </div>
-                            <div class=" col-sm-12 col-md-4" style={{ marginLeft: '50px' }} className="PoductBox">
+                            <div className=" col-sm-12 col-md-4" style={{ marginLeft: '50px' }} classNameName="PoductBox">
                                 <img src={prod1} style={{ width: '250px', }} alt="" />
                                 <hr style={{ width: '180px', color: "white" }} />
                                 <p style={{ color: 'white' }}>Name : Drill</p>
@@ -81,7 +81,7 @@ export default class Home extends Component {
                                 <p style={{ color: 'white' }}>Name : Drill</p>
                                 <Button style={Butt}> Show More</Button>
                             </div>
-                            <div class=" col-sm-12 col-md-4" style={{ marginLeft: '50px' }} className="PoductBox">
+                            <div className=" col-sm-12 col-md-4" style={{ marginLeft: '50px' }} classNameName="PoductBox">
                                 <img src={prod1} style={{ width: '250px', }} alt="" />
                                 <hr style={{ width: '180px', color: "white" }} />
                                 <p style={{ color: 'white' }}>Name : Drill</p>
@@ -90,7 +90,7 @@ export default class Home extends Component {
                                 <p style={{ color: 'white' }}>Name : Drill</p>
                                 <Button style={Butt}> Show More</Button>
                             </div>
-                            <div class=" col-sm-12 col-md-4" style={{ marginLeft: '50px' }} className="PoductBox">
+                            <div className=" col-sm-12 col-md-4" style={{ marginLeft: '50px' }} classNameName="PoductBox">
 
                                 <img src={prod1} style={{ width: '250px', }} alt="" />
                                 <hr style={{ width: '180px', color: "white" }} />
@@ -106,28 +106,28 @@ export default class Home extends Component {
                         </div>
                     </div>
                 </section>
-                <h2 style={{ textAlign: 'center', }} class=" col-sm-12 col-md-12"><span class="vertical-line2" ></span>REVIEWS ABOUT OUR PLATFORM <span class="vertical-line2" ></span></h2>
+                <h2 style={{ textAlign: 'center', }} className=" col-sm-12 col-md-12"><span className="vertical-line2" ></span>REVIEWS ABOUT OUR PLATFORM <span className="vertical-line2" ></span></h2>
 
                 <section id="about">
-                    <div class="container-fluid ">
-                        <div class="row" >
-                            <div class="  col-sm-12 col-md-4" className="reviewBox" style={{ marginLeft: '50px' }}>
+                    <div className="container-fluid ">
+                        <div className="row" >
+                            <div className="  col-sm-12 col-md-4" classNameName="reviewBox" style={{ marginLeft: '50px' }}>
 
                                 <p style={{ color: 'white' }}>hsdjhsdshjgdsjghjhsgdhsgj</p>
                                 <h3 style={{ textAlign: 'center', color: 'white' }} >hassen jalleli</h3>
 
                             </div>
-                            <div class=" col-sm-12 col-md-4" className="reviewBox" style={{ marginLeft: '50px' }}>
+                            <div className=" col-sm-12 col-md-4" classNameName="reviewBox" style={{ marginLeft: '50px' }}>
 
                                 <p style={{ color: 'white' }}>hsdjhsdshjgdsjghjhsgdhsgjhdgsjhgds</p>
                                 <h3 style={{ textAlign: 'center', color: 'white' }} >hassen jalleli</h3>
                             </div>
-                            <div class=" col-sm-12 col-md-4" className="reviewBox" style={{ marginLeft: '50px' }}>
+                            <div className=" col-sm-12 col-md-4" classNameName="reviewBox" style={{ marginLeft: '50px' }}>
 
                                 <p style={{ color: 'white' }}>hsdjhsdshjgdsjghjhsgdhsgjhdgsjhgds</p>
                                 <h3 style={{ textAlign: 'center', color: 'white' }} >hassen jalleli</h3>
                             </div>
-                            <div class=" col-sm-12 col-md-4" className="reviewBox" style={{ marginLeft: '50px' }}>
+                            <div className=" col-sm-12 col-md-4" classNameName="reviewBox" style={{ marginLeft: '50px' }}>
 
 
                                 <p style={{ color: 'white' }}>hsdjhsdshjgdsjghjhsgdhsgjhdgsjhgds</p>
@@ -139,26 +139,26 @@ export default class Home extends Component {
                         </div>
                     </div>
                 </section>
-                <h2 style={{ textAlign: 'center', }} class=" col-sm-12 col-md-12"><span class="vertical-line2" ></span>REVIEWS ABOUT OUR PLATFORM <span class="vertical-line2" ></span></h2>
+                <h2 style={{ textAlign: 'center', }} className=" col-sm-12 col-md-12"><span className="vertical-line2" ></span>REVIEWS ABOUT OUR PLATFORM <span className="vertical-line2" ></span></h2>
                 <section id="about">
-                    <div class="container-fluid ">
-                        <div class="row" >
-                            <div class="  col-sm-12 col-md-3" >
+                    <div className="container-fluid ">
+                        <div className="row" >
+                            <div className="  col-sm-12 col-md-3" >
                                 <a href="https://www.astral.tn/">
                                     <img src={astral} style={{ width: '250px' }} alt="" />
                                 </a>
                             </div>
-                            <div class="  col-sm-12 col-md-3" >
+                            <div className="  col-sm-12 col-md-3" >
                                 <a href="https://www.cat.com/en_US.html">
                                     <img src={cat} style={{ width: '250px' }} alt="" />
                                 </a>
                             </div>
-                            <div class="  col-sm-12 col-md-3" >
+                            <div className="  col-sm-12 col-md-3" >
                                 <a href="https://www.bosch.com/">
                                     <img src={bosch} style={{ width: '300px' }} alt="" />
                                 </a>
                             </div>
-                            <div class="  col-sm-12 col-md-3" >
+                            <div className="  col-sm-12 col-md-3" >
                                 <a href="https://www.se.com/tn/fr/">
                                     <img src={schneider} style={{ width: '250px' }} alt="" />
                                 </a>

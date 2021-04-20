@@ -19,6 +19,7 @@ i {
 .navbar-dark{
   background-color: black;
   height: 50px;
+  width: 100%;
 }
 .navbar1{
   background-color: white;
@@ -36,6 +37,7 @@ i {
 #navbarSupportedContent {
   overflow: hidden;
   position: relative;
+  width: 100%;
 }
 #navbarSupportedContent ul {
   padding: 0px;
