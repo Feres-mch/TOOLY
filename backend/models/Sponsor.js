@@ -6,6 +6,11 @@ const sponsorSchema = mongoose.Schema({
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: true },
   price: { type: Number, require: true, default: 1000 },
+  state: {
+    type: String,
+    enum: ["active", "notactive"],
+    default: "active",
+  },
 });
 
 const Sponsor = mongoose.model("Sponsor", sponsorSchema);

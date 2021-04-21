@@ -1,7 +1,11 @@
 import mongoose from "mongoose";
 
 const ProductSchema = mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  user_Id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
   name: { type: String, required: true },
   brand: { type: String, required: true },
   reference: { type: String, required: true, unique: true },
@@ -17,7 +21,7 @@ const ProductSchema = mongoose.Schema({
     img4: String,
   },
   description: { type: String, maxlength: 200 },
-  tutorial: { type: String },
+  tutorial: { type: String, required: true },
   rating: { type: Number, min: 0, max: 5, default: 0 },
 });
 const Product = mongoose.model("Product", ProductSchema);

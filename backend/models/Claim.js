@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const claimSchema = mongoose.Schema({
-  userId: {
+  user_Id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,

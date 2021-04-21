@@ -3,75 +3,70 @@ import Bill from "../models/Bill.js";
 
 const Router = express.Router();
 
-// Get-All-Biils (Done)
-Router.get("/", async (req, res) => {
-  try {
-    const bills = await Bill.find();
-    res.status(200).json(bills);
-  } catch (error) {
-    res.send({ message: error.message });
-  }
-});
-
-//Get-Bill-By-Id (Done)
-Router.get("/:id", async (req, res) => {
-  try {
-    const bill = await Bill.findById(req.params.id);
-    res.status(200).json(bill);
-  } catch (error) {
-    res.status(404).send({ message: error.message });
-  }
-});
-
-//Post-Bill (Done)
-Router.post("/", async (req, res) => {
-  const bill = new Bill({
-    order_Id: req.body.order_Id,
-    payementMedthod: req.body.payementMedthod,
-    payed: req.body.payed,
+//Get-All-Bills-Payed
+Router.get("/payed", async (req, res) => {
+  const billspayed = [];
+  const bills = await Bill.find({ payed: "yes" }).populate({
+    path: "order_Id",
+    populate: { path: "user_Id" },
   });
-  try {
-    const addedBill = await bill.save();
-    res.status(201).json(addedBill);
-  } catch (error) {
-    res.status(404).send({ message: error.message });
-  }
+  bills.map((bill) => {
+    billspayed.push({
+      reference: bill._id,
+      payementMedthod: bill.payementMedthod,
+      billingAdress: bill.billingAdress,
+      date: bill.order_Id.date,
+      username: bill.order_Id.user_Id.userName,
+      price: bill.order_Id.totalPrice,
+    });
+  });
+  res.json(billspayed);
 });
 
-//Put-Bill  (Done)
-Router.put("/:id", async (req, res) => {
-  try {
-    const bill = await Bill.findById(req.params.id);
-    bill.payed = "yes";
-    const updatedBill = await bill.save();
-    res.status(200).json(updatedBill);
-  } catch (error) {
-    res.status(404).send({ message: error.message });
-  }
-});
-
-//Delete-Bill-By-Id  (Done)
-Router.delete("/:id", async (req, res) => {
-  try {
-    const deletedBill = await Bill.findByIdAndRemove(req.params.id);
-    res.status(200).json(deletedBill);
-  } catch (error) {
-    res.status(404).send({ message: error.message });
-  }
+//Get-All-Bills-Not-Payed
+Router.get("/notpayed", async (req, res) => {
+  const billsnotpayed = [];
+  const bills = await Bill.find({ payed: "no" }).populate({
+    path: "order_Id",
+    populate: { path: "user_Id" },
+  });
+  bills.map((bill) => {
+    billsnotpayed.push({
+      reference: bill._id,
+      payementMedthod: bill.payementMedthod,
+      billingAdress: bill.billingAdress,
+      date: bill.order_Id.date,
+      username: bill.order_Id.user_Id.userName,
+      price: bill.order_Id.totalPrice,
+    });
+  });
+  res.json(billsnotpayed);
 });
 
 //Seed-Method
 Router.post("/seed", async (req, res) => {
   const bill1 = new Bill({
-    order_Id: "606d603ac0a7b82660700339",
+    order_Id: "607fc6c948ee7518e86cf85e",
     payementMedthod: "cash",
     payed: "no",
+    billingAdress: {
+      street: "tunisia",
+      city: "tunisia",
+      state: "tunisia",
+      postalCode: 1013,
+    },
   });
 
   const bill2 = new Bill({
-    order_Id: "606d603ac0a7b8266070033c",
+    order_Id: "607fc6c948ee7518e86cf861",
     payementMedthod: "online",
-    payed: "no",
+    payed: "yes",
+    billingAdress: {
+      street: "tunisia",
+      city: "tunisia",
+      state: "tunisia",
+      postalCode: 1013,
+    },
   });
 
   try {

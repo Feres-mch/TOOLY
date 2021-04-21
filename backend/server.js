@@ -2,13 +2,11 @@ import express from "express";
 import dotenv from "dotenv";
 import dataBase from "./dataBase/mongo.js";
 import billsRoute from "./routes/billRoute.js";
-import usersRoute from "./routes/userRoute.js";
-import productsRoute from "./routes/productRoute.js";
-import claimsRoute from "./routes/claimRoute.js";
-import reviewsRoute from "./routes/reviewRoute.js";
-import sponsorsRoute from "./routes/sponsorRoute.js";
-import deliverysRoute from "./routes/deliveryRoute.js";
-import ordersRoute from "./routes/orderRoute.js";
+import orderRoute from "./routes/orderRoute.js";
+import userRoute from "./routes/userRoute.js";
+import productRoute from "./routes/productRoute.js";
+import claimRoute from "./routes/claimRoute.js";
+import DeliveryRoute from "./routes/deliveryRoute.js";
 
 //config
 dotenv.config();
@@ -19,14 +17,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //routing
-app.use("/users", usersRoute);
-app.use("/products", productsRoute);
 app.use("/bills", billsRoute);
-app.use("/claims", claimsRoute);
-app.use("/reviews", reviewsRoute);
-app.use("/sponsors", sponsorsRoute);
-app.use("/deliverys", deliverysRoute);
-app.use("/orders", ordersRoute);
+app.use("/orders", orderRoute);
+app.use("/users", userRoute);
+app.use("/products", productRoute);
+app.use("/claims", claimRoute);
+app.use("/deliveries", DeliveryRoute);
 
 //port-config
 const port = process.env.PORT || 5000;

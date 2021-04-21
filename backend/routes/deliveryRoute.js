@@ -3,77 +3,101 @@ import Delivery from "../models/Delivery.js";
 
 const Router = express.Router();
 
-// Get-All-Deliverys (Done) Agent
-Router.get("/", async (req, res) => {
-  try {
-    const deliverys = await Delivery.find();
-    res.status(200).json(deliverys);
-  } catch (error) {
-    res.send({ message: error.message });
-  }
-});
-
-//Get-Delivery-By-Id (Done) DeliveryAgent
-Router.get("/:id", async (req, res) => {
-  try {
-    const delivery = await Delivery.findById(req.params.id);
-    res.status(200).json(delivery);
-  } catch (error) {
-    res.status(404).send({ message: error.message });
-  }
-});
-
-//Post-Delivery (Done) Agent
-Router.post("/", async (req, res) => {
-  const delivery = new Delivery({
-    deliveryAgent_id: req.body.deliveryAgent_id,
-    order_Id: req.body.order_Id,
-    deliveryMode: req.body.deliveryMode,
-    state: req.body.state,
+//Get-All-Orders-delivred
+Router.get("/delivred", async (req, res) => {
+  const delivred = [];
+  const orders = await Delivery.find({ state: "delivred" }).populate({
+    path: "order_Id",
+    populate: { path: "user_Id" },
   });
-  try {
-    const addedDelivery = await delivery.save();
-    res.status(201).json(addedDelivery);
-  } catch (error) {
-    res.status(404).send({ message: error.message });
-  }
+  orders.map((order) => {
+    delivred.push({
+      reference: order.order_Id._id,
+      username: order.order_Id.user_Id.userName,
+      date: order.order_Id.date,
+      totalprice: order.order_Id.totalPrice,
+      deliveryadress: order.deliveryAdress,
+    });
+  });
+  res.json(delivred);
 });
 
-//Put-Delivery (Done) Agent
-Router.put("/:id", async (req, res) => {
-  try {
-    const delivery = await Delivery.findById(req.params.id);
-    delivery.state = "delivred";
-    const updateDelivery = await delivery.save();
-    res.status(201).json(updateDelivery);
-  } catch (error) {
-    res.status(404).send({ message: error.message });
-  }
+//Get-All-Orders-Not-delivred-One-To-One
+Router.get("/onetoone", async (req, res) => {
+  const onetoone = [];
+  const orders = await Delivery.find({
+    state: "notyet",
+    deliveryMode: "OneToOne",
+  }).populate({
+    path: "order_Id",
+    populate: { path: "user_Id" },
+  });
+  orders.map((order) => {
+    onetoone.push({
+      reference: order.order_Id._id,
+      username: order.order_Id.user_Id.userName,
+      date: order.order_Id.date,
+      totalprice: order.order_Id.totalPrice,
+      deliveryadress: order.deliveryAdress,
+    });
+  });
+  res.json(onetoone);
 });
 
-//Delete-Delivery-By-Id  (Done) Agent
+//Get-All-Orders-Not-delivred-Delivery
 
-Router.delete("/:id", async (req, res) => {
-  try {
-    const deletedDelivery = await Delivery.findByIdAndRemove(req.params.id);
-    res.status(200).json(deletedDelivery);
-  } catch (error) {
-    res.status(404).send({ message: error.message });
-  }
+Router.get("/delivery", async (req, res) => {
+  const delivery = [];
+  const orders = await Delivery.find({
+    state: "notyet",
+    deliveryMode: "delivery",
+  }).populate({ path: "order_Id", populate: { path: "user_Id" } });
+  orders.map((order) => {
+    delivery.push({
+      reference: order.order_Id._id,
+      username: order.order_Id.user_Id.userName,
+      date: order.order_Id.date,
+      totalprice: order.order_Id.totalPrice,
+      deliveryadress: order.deliveryAdress,
+    });
+  });
+  res.json(delivery);
 });
 
 //Seed-Method
 Router.post("/seed", async (req, res) => {
   const delivery1 = new Delivery({
-    deliveryAgent_id: "606d559a4626c6443c745f2f",
-    order_Id: "606d603ac0a7b82660700339",
+    order_Id: "607fc6c948ee7518e86cf85e",
+    deliveryAdress: {
+      street: "hedi medeni",
+      city: "jaafer",
+      state: "ariana",
+      postalCode: 2083,
+    },
     deliveryMode: "OneToOne",
     state: "notyet",
   });
 
   const delivery2 = new Delivery({
-    deliveryAgent_id: "606d559a4626c6443c745f30",
-    order_Id: "606d603ac0a7b8266070033c",
+    order_Id: "607fc6c948ee7518e86cf861",
+    deliveryAdress: {
+      street: "saleh ben youssef",
+      city: "menzah9",
+      state: "tunis",
+      postalCode: 2064,
+    },
+    deliveryMode: "delivery",
+    state: "delivred",
+  });
+
+  const delivery3 = new Delivery({
+    order_Id: "607fc6c948ee7518e86cf864",
+    deliveryAdress: {
+      street: "mohi din klibi",
+      city: "petite ariana",
+      state: "ariana",
+      postalCode: 2074,
+    },
     deliveryMode: "delivery",
     state: "notyet",
   });
@@ -81,6 +105,7 @@ Router.post("/seed", async (req, res) => {
   try {
     const addedDelivery1 = await delivery1.save();
     const addedDelivery2 = await delivery2.save();
+    const addedDelivery3 = await delivery3.save();
     res.status(201).json("all deliverys are created");
   } catch (error) {
     res.status(404).send({ message: error.message });

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const reviewSchema = mongoose.Schema({
-  userId: {
+  user_Id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
