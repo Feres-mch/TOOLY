@@ -16,7 +16,7 @@ const BlackNavBar = () => {
           </Link>
         </li>
         <li>
-          <Link className="links" to="/">
+          <Link className="links" to="/ihave">
             i want
           </Link>
         </li>

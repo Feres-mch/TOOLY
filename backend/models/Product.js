@@ -23,6 +23,7 @@ const ProductSchema = mongoose.Schema({
   description: { type: String, maxlength: 200 },
   tutorial: { type: String, required: true },
   rating: { type: Number, min: 0, max: 5, default: 0 },
+  enable: { type: Boolean, required: true },
 });
 const Product = mongoose.model("Product", ProductSchema);
 
