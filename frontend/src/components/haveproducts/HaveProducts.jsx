@@ -2,7 +2,7 @@ import React from "react";
 import BlackNavBar from "../blacknavbar/BlackNavBar";
 import MyPorducts from "./myproducts/MyPorducts";
 import { AddProduct } from "./addproduct/AddProduct";
-import { MyProductEdit } from "./myproductedit/MyProductEdit";
+import MyProductEdit from "./myproductedit/MyProductEdit";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import "./HaveProducts.css";
 

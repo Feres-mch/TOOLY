@@ -5,7 +5,6 @@ import multer from "multer";
 import cloudinary from "cloudinary";
 import fs from "fs";
 import path from "path";
-import { url } from "inspector";
 
 const Router = express.Router();
 
@@ -67,6 +66,68 @@ Router.get("/allproducts/:id", async (req, res) => {
   }
 });
 
+//Get-Products-By-User-Id-And-Filters
+Router.get("/filtred/:id", async (req, res) => {
+  console.log(req.query.category);
+  const products = [];
+  try {
+    const allproducts = await Product.find({
+      user_Id: new mongoose.Types.ObjectId(req.params.id),
+      enable: true,
+    });
+    allproducts.map((product) => {
+      console.log(req.params.id);
+      console.log(req.query.category);
+      console.log(req.query.brand);
+      console.log(req.query.name);
+      if (
+        (req.query.category == "" ||
+          product.category
+            .toUpperCase()
+            .includes(req.query.category.toUpperCase())) &&
+        (req.query.brand == "" ||
+          product.brand
+            .toUpperCase()
+            .includes(req.query.brand.toUpperCase())) &&
+        (req.query.name == "" ||
+          product.name.toUpperCase().includes(req.query.name.toUpperCase()))
+      ) {
+        products.push({
+          reference: product.reference,
+          name: product.name,
+          _id: product._id,
+          brand: product.brand,
+          category: product.category,
+          price: product.pricePerDay,
+          image: product.images.img1,
+        });
+      }
+    });
+    console.log(products);
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(404).send({ message: error.message });
+  }
+});
+
+//Get-Product-By-Id
+Router.get("/:id", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    res.status(200).json({
+      name: product.name,
+      reference: product.reference,
+      category: product.category,
+      description: product.description,
+      brand: product.brand,
+      tutorial: product.tutorial,
+      pricePerDay: product.pricePerDay,
+    });
+  } catch (error) {
+    res.status(404).send({ message: error.message });
+  }
+});
+
 //Add-Product
 Router.post(
   "/addproduct",
@@ -81,17 +142,24 @@ Router.post(
     const files = req.files;
 
     const path1 = files.image1[0].path;
+    const path2 = files.image2[0].path;
+    const path3 = files.image3[0].path;
+    const path4 = files.image4[0].path;
+
     const newPath1 = await cloudinary.uploader.upload(path1);
-    urls.push(newPath1.secure_url);
-    const path2 = files.image1[0].path;
     const newPath2 = await cloudinary.uploader.upload(path2);
-    urls.push(newPath2.secure_url);
-    const path3 = files.image1[0].path;
     const newPath3 = await cloudinary.uploader.upload(path3);
-    urls.push(newPath3.secure_url);
-    const path4 = files.image1[0].path;
     const newPath4 = await cloudinary.uploader.upload(path4);
+
+    urls.push(newPath2.secure_url);
+    urls.push(newPath1.secure_url);
+    urls.push(newPath3.secure_url);
     urls.push(newPath4.secure_url);
+
+    fs.unlinkSync(path1);
+    fs.unlinkSync(path2);
+    fs.unlinkSync(path3);
+    fs.unlinkSync(path4);
 
     const product = new Product({
       user_Id: req.body.user_Id,
@@ -114,6 +182,77 @@ Router.post(
     try {
       const productAdded = await product.save();
       res.status(201).json(productAdded);
+    } catch (error) {
+      res.status(404).send({ message: error.message });
+    }
+  }
+);
+
+//Edit-Product
+Router.put(
+  "/editproduct/:id",
+  upload.fields([
+    { name: "image1", maxCount: 1 },
+    { name: "image2", maxCount: 1 },
+    { name: "image3", maxCount: 1 },
+    { name: "image4", maxCount: 1 },
+  ]),
+  async (req, res) => {
+    const urls = [];
+    const files = req.files;
+
+    if (files.image1 == null || files.image1 === undefined) {
+      const product = await Product.findById(req.params.id);
+      urls.push(product.images.image1);
+    } else {
+      const path1 = files.image1[0].path;
+      const newPath1 = await cloudinary.uploader.upload(path1);
+      urls.push(newPath1.secure_url);
+      fs.unlinkSync(path1);
+    }
+    if (files.image2 == null || files.image2 === undefined) {
+      const product = await Product.findById(req.params.id);
+      urls.push(product.images.image2);
+    } else {
+      const path2 = files.image2[0].path;
+      const newPath2 = await cloudinary.uploader.upload(path2);
+      urls.push(newPath2.secure_url);
+      fs.unlinkSync(path2);
+    }
+    if (files.image3 == null || files.image3 === undefined) {
+      const product = await Product.findById(req.params.id);
+      urls.push(product.images.image3);
+    } else {
+      const path3 = files.image3[0].path;
+      const newPath3 = await cloudinary.uploader.upload(path3);
+      urls.push(newPath3.secure_url);
+      fs.unlinkSync(path3);
+    }
+    if (files.image4 == null || files.image4 === undefined) {
+      const product = await Product.findById(req.params.id);
+      urls.push(product.images.image4);
+    } else {
+      const path4 = files.image4[0].path;
+      const newPath4 = await cloudinary.uploader.upload(path4);
+      urls.push(newPath4.secure_url);
+      fs.unlinkSync(path4);
+    }
+
+    try {
+      const product = await Product.findByIdAndUpdate(req.params.id, {
+        category: req.body.category,
+        description: req.body.description,
+        tutorial: req.body.tutorial,
+        pricePerDay: req.body.pricePerDay,
+        images: {
+          img1: urls[0],
+          img2: urls[0],
+          img3: urls[0],
+          img4: urls[0],
+        },
+      });
+
+      res.status(200).send("Product edited succsessfully");
     } catch (error) {
       res.status(404).send({ message: error.message });
     }

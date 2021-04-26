@@ -31,7 +31,7 @@ const BillsPayed = () => {
         </thead>
         <tbody>
           {bills.map((bill) => (
-            <tr>
+            <tr key={bill.reference}>
               <Link className="bill-id">
                 <td>{bill.reference}</td>
               </Link>

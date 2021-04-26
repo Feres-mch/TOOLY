@@ -11,15 +11,29 @@ const MyPorducts = () => {
 
   const history = useHistory();
 
+  const [brand, setbrand] = useState("");
+  const [category, setcategory] = useState("");
+  const [name, setname] = useState("");
+
   useEffect(() => {
     const source = Axios.CancelToken.source();
 
     const fetchdata = async () => {
       try {
-        const { data } = await Axios.get(`/products/allproducts/${user_id}`, {
-          cancelToken: source.token,
-        });
-        setproducts(data);
+        if (brand === "" && category === "" && name === "") {
+          const { data } = await Axios.get(`/products/allproducts/${user_id}`, {
+            cancelToken: source.token,
+          });
+          setproducts(data);
+        } else {
+          const { data } = await Axios.get(
+            `/products/filtred/${user_id}?category=${category}&brand=${brand}&name=${name}`,
+            {
+              cancelToken: source.token,
+            }
+          );
+          setproducts(data);
+        }
       } catch (error) {
         if (Axios.isCancel(error)) {
           console.log("component will unmount");
@@ -34,7 +48,7 @@ const MyPorducts = () => {
     return () => {
       source.cancel();
     };
-  });
+  }, [products, user_id]);
 
   const handleEditProduct = (id) => {
     history.push(`/ihave/details/${id}`);
@@ -48,6 +62,12 @@ const MyPorducts = () => {
     await Axios.put(`/products/delete/${id}`);
   };
 
+  const filtredProducts = (e) => {
+    if (e.currentTarget.name === "name") setname(e.currentTarget.value);
+    if (e.currentTarget.name === "brand") setbrand(e.currentTarget.value);
+    if (e.currentTarget.name === "category") setcategory(e.currentTarget.value);
+  };
+
   return (
     <>
       <Container fluid>
@@ -57,16 +77,25 @@ const MyPorducts = () => {
             type="text"
             placeholder="Search By Name"
             className="myproducts-search"
+            onChange={filtredProducts}
+            value={name}
+            name="name"
           />
           <input
             type="text"
             placeholder="Search By brand"
             className="myproducts-search"
+            onChange={filtredProducts}
+            value={brand}
+            name="brand"
           />
           <input
             type="text"
             placeholder="Search By category"
             className="myproducts-search"
+            onChange={filtredProducts}
+            value={category}
+            name="category"
           />
           <Button
             variant="warning"

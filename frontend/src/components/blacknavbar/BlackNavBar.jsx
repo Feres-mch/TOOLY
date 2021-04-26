@@ -11,12 +11,12 @@ const BlackNavBar = () => {
       </Link>
       <ul>
         <li>
-          <Link className="links" to="/">
+          <Link className="links active" to="/ihave">
             i have
           </Link>
         </li>
         <li>
-          <Link className="links" to="/ihave">
+          <Link className="links" to="">
             i want
           </Link>
         </li>

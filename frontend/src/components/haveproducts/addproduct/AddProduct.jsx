@@ -30,7 +30,7 @@ export const AddProduct = () => {
     user_Id: Joi.string().required(),
     name: Joi.string().min(3).max(15).required(),
     reference: Joi.string().min(3).max(15).required(),
-    description: Joi.string().min(50).max(200).required(),
+    description: Joi.string().min(10).max(200).required(),
     category: Joi.required(),
     brand: Joi.string().min(3).max(15).required(),
     tutorial: Joi.string().required(),
@@ -107,6 +107,11 @@ export const AddProduct = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addProduct(product);
+    history.goBack();
+  };
+
+  //Handle-OnClick-Back
+  const handleBack = () => {
     history.goBack();
   };
 
@@ -274,7 +279,11 @@ export const AddProduct = () => {
             )}
           </div>
           <div className="formulaire-buttons">
-            <Button variant="dark" className="add-product-buttons-submit">
+            <Button
+              variant="dark"
+              className="add-product-buttons-submit"
+              onClick={handleBack}
+            >
               back
             </Button>
             <Button

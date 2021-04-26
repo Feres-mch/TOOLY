@@ -50,3 +50,7 @@
   text-transform: uppercase;
   text-decoration: none;
 }
+
+.tooly-nav-bar .active {
+  color: #fbbb0c;
+}
