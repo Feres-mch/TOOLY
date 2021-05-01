@@ -11,11 +11,11 @@ const HaveProducts = () => {
 
   return (
     <>
-      <BlackNavBar />
+      <BlackNavBar active="have" />
       <Switch>
         <Route path={path} component={MyPorducts} exact />
         <Route path={`${url}/addproduct`} component={AddProduct} exact />
-        <Route path={`${url}/details/:id`} component={MyProductEdit} exact />
+        <Route path={`${url}/edit/:id`} component={MyProductEdit} exact />
       </Switch>
     </>
   );

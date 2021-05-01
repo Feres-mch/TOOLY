@@ -41,6 +41,49 @@ const upload = multer({
   fileFilter: fileFilter,
 });
 
+////////////////////////////////// GET /////////////////////////////////////
+//Get-All-Propducts-Filtred-By-Categories-And-Brands
+Router.get("/all/filtred/:id", async (req, res) => {
+  const products = [];
+
+  try {
+    const allproducts = await Product.find({
+      user_Id: { $ne: new mongoose.Types.ObjectId(req.params.id) },
+      enable: true,
+    });
+
+    allproducts.map((product) => {
+      if (
+        (req.query.category.toLowerCase() === "all" ||
+          product.category.toLowerCase() ===
+            req.query.category.toLowerCase()) &&
+        (req.query.brand.toLowerCase() === "all" ||
+          product.brand.toLowerCase() === req.query.brand.toLowerCase())
+      ) {
+        if (
+          (req.query.maxprice == 0 && req.query.minprice == 0) ||
+          (req.query.maxprice >= product.pricePerDay &&
+            req.query.minprice <= product.pricePerDay)
+        ) {
+          products.push({
+            reference: product.reference,
+            name: product.name,
+            _id: product._id,
+            brand: product.brand,
+            category: product.category,
+            price: product.pricePerDay,
+            image: product.images.img1,
+          });
+        }
+      }
+    });
+
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(404).send({ message: error.message });
+  }
+});
+
 //Get-All-Products-By-User-Id
 Router.get("/allproducts/:id", async (req, res) => {
   const products = [];
@@ -66,9 +109,64 @@ Router.get("/allproducts/:id", async (req, res) => {
   }
 });
 
+//Get-All-Products
+Router.get("/all/:id", async (req, res) => {
+  const products = [];
+  try {
+    const productsMg = await Product.find({
+      user_Id: { $ne: new mongoose.Types.ObjectId(req.params.id) },
+      enable: true,
+    });
+    productsMg.map((product) => {
+      products.push({
+        reference: product.reference,
+        name: product.name,
+        _id: product._id,
+        brand: product.brand,
+        category: product.category,
+        price: product.pricePerDay,
+        image: product.images.img1,
+      });
+    });
+    res.status(200).send(products);
+  } catch (error) {
+    res.status(404).send({ message: error.message });
+  }
+});
+
+//Get-All-Brands
+Router.get("/allbrands", async (req, res) => {
+  try {
+    const brands = await Product.find()
+      .select({ brand: 1, _id: 0 })
+      .distinct("brand");
+    brands.push("all");
+    res.status(200).json(brands);
+  } catch (error) {
+    res.status(404).send({ message: error.message });
+  }
+});
+
+// get product by id
+Router.get("/:id", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    res.status(200).json({
+      name: product.name,
+      reference: product.reference,
+      category: product.category,
+      description: product.description,
+      brand: product.brand,
+      tutorial: product.tutorial,
+      pricePerDay: product.pricePerDay,
+    });
+  } catch (error) {
+    res.status(404).send({ message: error.message });
+  }
+});
+
 //Get-Products-By-User-Id-And-Filters
 Router.get("/filtred/:id", async (req, res) => {
-  console.log(req.query.category);
   const products = [];
   try {
     const allproducts = await Product.find({
@@ -76,10 +174,6 @@ Router.get("/filtred/:id", async (req, res) => {
       enable: true,
     });
     allproducts.map((product) => {
-      console.log(req.params.id);
-      console.log(req.query.category);
-      console.log(req.query.brand);
-      console.log(req.query.name);
       if (
         (req.query.category == "" ||
           product.category
@@ -103,7 +197,6 @@ Router.get("/filtred/:id", async (req, res) => {
         });
       }
     });
-    console.log(products);
     res.status(200).json(products);
   } catch (error) {
     res.status(404).send({ message: error.message });
@@ -111,9 +204,10 @@ Router.get("/filtred/:id", async (req, res) => {
 });
 
 //Get-Product-By-Id
-Router.get("/:id", async (req, res) => {
+Router.get("/productdetails/:id", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
+    console.log(product.images.img1);
     res.status(200).json({
       name: product.name,
       reference: product.reference,
@@ -121,12 +215,19 @@ Router.get("/:id", async (req, res) => {
       description: product.description,
       brand: product.brand,
       tutorial: product.tutorial,
+      img1: product.images.img1,
+      img2: product.images.img2,
+      img3: product.images.img3,
+      img4: product.images.img4,
+
       pricePerDay: product.pricePerDay,
     });
   } catch (error) {
     res.status(404).send({ message: error.message });
   }
 });
+
+////////////////////////////////// POST /////////////////////////////////////
 
 //Add-Product
 Router.post(
@@ -187,6 +288,8 @@ Router.post(
     }
   }
 );
+
+////////////////////////////////// PUT /////////////////////////////////////
 
 //Edit-Product
 Router.put(

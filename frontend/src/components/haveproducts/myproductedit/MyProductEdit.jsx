@@ -37,7 +37,7 @@ const MyProductEdit = () => {
         setproduct(data);
       } catch (error) {
         if (Axios.isCancel(error)) {
-          console.log("component will unmount");
+          console.log(error);
         } else {
           throw error;
         }
@@ -193,7 +193,7 @@ const MyProductEdit = () => {
               value={product.category}
               onChange={handleChange}
             >
-              <option value="Gardning">Gardning</option>
+              <option value="Gardening">Gardning</option>
               <option value="DIY">DIY</option>
               <option value="Plombry">Plombry</option>
               <option value="Electricity">Electricity</option>

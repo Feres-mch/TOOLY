@@ -43,6 +43,10 @@
   color: black;
 }
 
+.tooly-nav-bar ul li:hover .active {
+  color: black;
+}
+
 .tooly-nav-bar .links {
   color: inherit;
   font-weight: 00;

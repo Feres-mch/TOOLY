@@ -48,10 +48,10 @@ const MyPorducts = () => {
     return () => {
       source.cancel();
     };
-  }, [products, user_id]);
+  });
 
   const handleEditProduct = (id) => {
-    history.push(`/ihave/details/${id}`);
+    history.push(`/ihave/edit/${id}`);
   };
 
   const handleAddProduct = () => {
