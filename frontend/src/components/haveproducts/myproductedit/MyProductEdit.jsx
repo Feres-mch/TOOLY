@@ -1,22 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import Joi from "joi-browser";
+import { useHistory, useParams } from "react-router-dom";
 import Axios from "axios";
-import { useHistory } from "react-router-dom";
-import "./AddProduct.css";
+import "./MyProductEdit.css";
 
-export const AddProduct = () => {
+const MyProductEdit = () => {
   const history = useHistory();
+  const { id } = useParams();
   //Product
   const [product, setproduct] = useState({
-    user_Id: "607e3725f430a2101068f1cf",
     name: "",
     reference: "",
     category: "",
     description: "",
     brand: "",
     tutorial: "",
-    pricePerDay: 20,
+    pricePerDay: 0,
   });
   //images
   const [image1, setimage1] = useState(React.createRef());
@@ -25,9 +25,34 @@ export const AddProduct = () => {
   const [image4, setimage4] = useState(React.createRef());
   //error
   const [error, seterror] = useState("");
+
+  //Use-Effect
+  useEffect(() => {
+    const source = Axios.CancelToken.source();
+    const fetchdata = async () => {
+      try {
+        const { data } = await Axios.get(`/products/${id}`, {
+          cancelToken: source.token,
+        });
+        setproduct(data);
+      } catch (error) {
+        if (Axios.isCancel(error)) {
+          console.log(error);
+        } else {
+          throw error;
+        }
+      }
+    };
+
+    fetchdata();
+
+    return () => {
+      source.cancel();
+    };
+  }, [id]);
+
   //Schema(Joi)
   const schema = {
-    user_Id: Joi.string().required(),
     name: Joi.string().min(3).max(15).required(),
     reference: Joi.string().min(3).max(15).required(),
     description: Joi.string().min(10).max(200).required(),
@@ -72,33 +97,25 @@ export const AddProduct = () => {
     if (e.currentTarget.name === "image3") setimage3(e.target.files[0]);
     if (e.currentTarget.name === "image4") setimage4(e.target.files[0]);
   };
-  //Async-Add-Product
-  const addProduct = async ({
-    reference,
-    name,
-    brand,
+
+  const editProduct = async ({
     tutorial,
     pricePerDay,
     category,
     description,
-    user_Id,
   }) => {
     const data = new FormData();
-    data.append("image1", image1);
-    data.append("image2", image2);
-    data.append("image3", image3);
-    data.append("image4", image4);
-    data.append("user_Id", user_Id);
-    data.append("reference", reference);
-    data.append("name", name);
-    data.append("brand", brand);
+    if (image1 != null || image1 !== undefined) data.append("image1", image1);
+    if (image2 != null || image2 !== undefined) data.append("image2", image2);
+    if (image3 != null || image3 !== undefined) data.append("image3", image3);
+    if (image4 != null || image4 !== undefined) data.append("image4", image4);
     data.append("tutorial", tutorial);
     data.append("pricePerDay", pricePerDay);
     data.append("category", category);
     data.append("description", description);
 
     try {
-      await Axios.post("/products/addproduct", data);
+      await Axios.put(`/products/editproduct/${id}`, data);
     } catch (error) {
       console.log("probleme");
     }
@@ -106,7 +123,7 @@ export const AddProduct = () => {
   //Handle-OnSubmit
   const handleSubmit = (e) => {
     e.preventDefault();
-    addProduct(product);
+    editProduct(product);
     history.goBack();
   };
 
@@ -117,9 +134,9 @@ export const AddProduct = () => {
 
   return (
     <>
-      <h1 className="add-product-title">add new product</h1>
-      <form className="add-product-formulaire" onSubmit={handleSubmit}>
-        <div className="add-product-first-step">
+      <h1 className="edit-product-title">add new product</h1>
+      <form className="edit-product-formulaire" onSubmit={handleSubmit}>
+        <div className="edit-product-first-step">
           <div className="form-group">
             <label htmlFor="name">name</label>
             <input
@@ -128,11 +145,8 @@ export const AddProduct = () => {
               type="text"
               className="form-control"
               value={product.name}
-              onChange={handleChange}
+              disabled={true}
             />
-            {error.input === "name" && (
-              <div className="alert alert-danger"> {error.message}</div>
-            )}
           </div>
           <div className="form-group">
             <label htmlFor="brand">brand</label>
@@ -142,11 +156,8 @@ export const AddProduct = () => {
               type="text"
               className="form-control"
               value={product.brand}
-              onChange={handleChange}
+              disabled={true}
             />
-            {error.input === "brand" && (
-              <div className="alert alert-danger"> {error.message}</div>
-            )}
           </div>
           <div className="form-group">
             <label htmlFor="reference">reference</label>
@@ -156,11 +167,8 @@ export const AddProduct = () => {
               type="text"
               className="form-control"
               value={product.reference}
-              onChange={handleChange}
+              disabled={true}
             />
-            {error.input === "reference" && (
-              <div className="alert alert-danger"> {error.message}</div>
-            )}
           </div>
           <div className="form-group">
             <label htmlFor="description">description</label>
@@ -192,9 +200,6 @@ export const AddProduct = () => {
               <option value="Painting">Painting</option>
               <option value="Lighting">Lighting</option>
             </select>
-            {error.input === "category" && (
-              <div className="alert alert-danger"> {error.message}</div>
-            )}
           </div>
           <div className="form-group">
             <label htmlFor="pricePerDay">Price per day</label>
@@ -211,7 +216,7 @@ export const AddProduct = () => {
             )}
           </div>
         </div>
-        <div className="add-product-second-step">
+        <div className="edit-product-second-step">
           <div className="form-group">
             <label htmlFor="image1" className="input-images-labels">
               import image 1
@@ -281,7 +286,7 @@ export const AddProduct = () => {
           <div className="formulaire-buttons">
             <Button
               variant="dark"
-              className="add-product-buttons-submit"
+              className="edit-product-buttons-submit"
               onClick={handleBack}
             >
               back
@@ -289,7 +294,7 @@ export const AddProduct = () => {
             <Button
               variant="warning"
               type="submit"
-              className="add-product-buttons-submit"
+              className="edit-product-buttons-submit"
               disabled={validate()}
             >
               submit
@@ -300,3 +305,5 @@ export const AddProduct = () => {
     </>
   );
 };
+
+export default MyProductEdit;

@@ -3,7 +3,7 @@ import "./BlackNavBar.css";
 import { Link } from "react-router-dom";
 import Logo from "../../images/logo.png";
 
-const BlackNavBar = () => {
+const BlackNavBar = ({ active }) => {
   return (
     <div className="tooly-nav-bar">
       <Link className="image" to="/">
@@ -11,27 +11,39 @@ const BlackNavBar = () => {
       </Link>
       <ul>
         <li>
-          <Link className="links" to="/">
+          <Link
+            className={active === "have" ? "links active" : "links"}
+            to="/ihave"
+          >
             i have
           </Link>
         </li>
         <li>
-          <Link className="links" to="/">
+          <Link
+            className={active === "want" ? "links active" : "links"}
+            to="/iwant"
+          >
             i want
           </Link>
         </li>
         <li>
-          <Link className="links" to="/">
+          <Link
+            className={active === "contact us" ? "links active" : "links"}
+            to="/"
+          >
             contact us
           </Link>
         </li>
         <li>
-          <Link className="links" to="/">
+          <Link
+            className={active === "profile" ? "links active" : "links"}
+            to="/"
+          >
             profile
           </Link>
         </li>
         <li>
-          <Link className="links" to="/">
+          <Link className={active === "cart" ? "links active" : "links"} to="/">
             cart
           </Link>
         </li>

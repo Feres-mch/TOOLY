@@ -1,4 +1,4 @@
-.add-product-title {
+.edit-product-title {
   margin-left: auto;
   margin-right: auto;
   width: 30%;
@@ -8,35 +8,35 @@
   margin-top: 20px;
 }
 
-.add-product-formulaire {
+.edit-product-formulaire {
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
-.add-product-formulaire label {
+.edit-product-formulaire label {
   font-weight: bold;
   text-transform: uppercase;
   border-bottom: 3px solid #fbbb0c;
 }
-.add-product-formulaire .form-control {
+.edit-product-formulaire .form-control {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
-.add-product-first-step {
+.edit-product-first-step {
   width: 30%;
 }
 
-.add-product-second-step {
+.edit-product-second-step {
   width: 30%;
   margin-top: 20px;
 }
 
-.add-product-second-step .images-input {
+.edit-product-second-step .images-input {
   display: none;
 }
 
-.add-product-second-step .input-images-labels {
+.edit-product-second-step .input-images-labels {
   background-color: transparent;
   border: 4px solid #fbbb0c;
   height: 40px;
@@ -51,7 +51,7 @@
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
-.add-product-second-step .input-images-labels:hover {
+.edit-product-second-step .input-images-labels:hover {
   cursor: pointer;
   background-color: #fbbb0c;
   color: black;
@@ -69,7 +69,7 @@
   margin-right: auto;
 }
 
-.add-product-buttons-submit {
+.edit-product-buttons-submit {
   width: 80%;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
