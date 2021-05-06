@@ -83,7 +83,7 @@ const ProductList = () => {
       console.log("unmount");
       source.cancel();
     };
-  }, [brand, category, maxPrice, minPrice]);
+  }, [brand, category, maxPrice, minPrice, user_id]);
 
   const handleOnChange = (e) => {
     if (e.currentTarget.name === "category") setcategory(e.currentTarget.value);

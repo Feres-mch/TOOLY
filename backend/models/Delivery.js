@@ -1,16 +1,12 @@
 import mongoose from "mongoose";
 
 const deliverSchema = mongoose.Schema({
-  deliveryAgent_Id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
   order_Id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Order",
     required: true,
   },
-  deliveryAdress: {
+  deliveryAddress: {
     street: String,
     city: String,
     state: String,

@@ -43,7 +43,10 @@ const BlackNavBar = ({ active }) => {
           </Link>
         </li>
         <li>
-          <Link className={active === "cart" ? "links active" : "links"} to="/">
+          <Link
+            className={active === "cart" ? "links active" : "links"}
+            to="/cart"
+          >
             cart
           </Link>
         </li>

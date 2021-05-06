@@ -12,7 +12,7 @@ const ProductSchema = mongoose.Schema({
   category: {
     type: String,
     enum: [
-      "Gardning",
+      "Gardening",
       "DIY",
       "Plombry",
       "Electricity",

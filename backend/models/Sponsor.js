@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const sponsorSchema = mongoose.Schema({
-  brand: { type: String, require: true, unique: true, maxlength: 30 },
+  brand: { type: String, require: true, unique: true },
   logo: { type: String, require: true },
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: true },

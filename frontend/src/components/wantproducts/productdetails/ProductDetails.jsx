@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import Axios from "axios";
 import "./ProductDetails.css";
 
 const ProductDetails = () => {
+  const history = useHistory();
   const { id } = useParams();
   const [product, setproduct] = useState({});
+  const [startDate, setstartDate] = useState("");
+  const [endDate, setendDate] = useState("");
 
   useEffect(() => {
     const source = Axios.CancelToken.source();
@@ -31,6 +34,47 @@ const ProductDetails = () => {
     };
   }, [id]);
 
+  const handleOnChange = (e) => {
+    if (e.currentTarget.name === "startDate")
+      setstartDate(e.currentTarget.value);
+    if (e.currentTarget.name === "endDate") setendDate(e.currentTarget.value);
+  };
+
+  const handleAddToCart = async () => {
+    let verified = true;
+    const products = localStorage.getItem("products") || [];
+
+    if (verified) {
+      try {
+        const { data } = await Axios.get(
+          `/orders/available/${id}?endDate=${endDate}&startDate=${startDate}`
+        );
+        if (data === false) alert("product Not available on this period");
+        else {
+          const numberOfDays =
+            (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24);
+
+          const totalPrice = product.pricePerDay * numberOfDays;
+          const newProducts = [...products];
+
+          newProducts.push({
+            endDate: endDate,
+            img: product.img1,
+            name: product.name,
+            pricePerDay: product.pricePerDay,
+            startDate: startDate,
+            totalprice: totalPrice,
+            _id: id,
+            reference: product.reference,
+          });
+          localStorage.setItem("products", JSON.stringify(newProducts));
+          history.push("/cart");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
   return (
     <div>
       <Container fluid className="conteneur">
@@ -91,6 +135,7 @@ const ProductDetails = () => {
                           name="startDate"
                           id="startDate"
                           className="datepicker"
+                          onChange={handleOnChange}
                         />
                       </Col>
                       <Col className="md-4">
@@ -100,6 +145,7 @@ const ProductDetails = () => {
                           name="endDate"
                           id="endDate"
                           className="datepicker"
+                          onChange={handleOnChange}
                         />
                         <div className="vl"></div>
                       </Col>
@@ -110,7 +156,9 @@ const ProductDetails = () => {
                     </Row>
                   </Container>
 
-                  <button className="addtocart ">ADD TO CART</button>
+                  <button className="addtocart " onClick={handleAddToCart}>
+                    ADD TO CART
+                  </button>
                 </Card.Text>
               </Card.Body>
             </Card>

@@ -140,6 +140,7 @@ Router.get("/allbrands", async (req, res) => {
     const brands = await Product.find()
       .select({ brand: 1, _id: 0 })
       .distinct("brand");
+
     brands.push("all");
     res.status(200).json(brands);
   } catch (error) {
@@ -257,11 +258,6 @@ Router.post(
     urls.push(newPath3.secure_url);
     urls.push(newPath4.secure_url);
 
-    fs.unlinkSync(path1);
-    fs.unlinkSync(path2);
-    fs.unlinkSync(path3);
-    fs.unlinkSync(path4);
-
     const product = new Product({
       user_Id: req.body.user_Id,
       name: req.body.name,
@@ -311,7 +307,6 @@ Router.put(
       const path1 = files.image1[0].path;
       const newPath1 = await cloudinary.uploader.upload(path1);
       urls.push(newPath1.secure_url);
-      fs.unlinkSync(path1);
     }
     if (files.image2 == null || files.image2 === undefined) {
       const product = await Product.findById(req.params.id);
@@ -320,7 +315,6 @@ Router.put(
       const path2 = files.image2[0].path;
       const newPath2 = await cloudinary.uploader.upload(path2);
       urls.push(newPath2.secure_url);
-      fs.unlinkSync(path2);
     }
     if (files.image3 == null || files.image3 === undefined) {
       const product = await Product.findById(req.params.id);
@@ -329,7 +323,6 @@ Router.put(
       const path3 = files.image3[0].path;
       const newPath3 = await cloudinary.uploader.upload(path3);
       urls.push(newPath3.secure_url);
-      fs.unlinkSync(path3);
     }
     if (files.image4 == null || files.image4 === undefined) {
       const product = await Product.findById(req.params.id);

@@ -123,10 +123,10 @@ const AgentSideBar = () => {
         </Button>
         <Collapse in={openSponsors}>
           <div id="Sponsors">
-            <Link className="links" to="/">
+            <Link className="links" to={`${url}/sponsorall`}>
               All
             </Link>
-            <Link className="links" to="/">
+            <Link className="links" to={`${url}/sponsoractive`}>
               Active
             </Link>
           </div>
