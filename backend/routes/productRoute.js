@@ -140,7 +140,6 @@ Router.get("/allbrands", async (req, res) => {
     const brands = await Product.find()
       .select({ brand: 1, _id: 0 })
       .distinct("brand");
-
     brands.push("all");
     res.status(200).json(brands);
   } catch (error) {
