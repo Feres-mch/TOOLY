@@ -8,7 +8,7 @@ const billSchema = mongoose.Schema({
   },
   payementMedthod: { type: String, enum: ["cash", "online"] },
   payed: { type: String, enum: ["yes", "no"] },
-  billingAdress: {
+  billingAddress: {
     street: String,
     city: String,
     state: String,

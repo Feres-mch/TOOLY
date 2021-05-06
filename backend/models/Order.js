@@ -8,6 +8,7 @@ export const orderSchema = mongoose.Schema({
   },
   products: [
     {
+      _id: false,
       product_Id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Product",

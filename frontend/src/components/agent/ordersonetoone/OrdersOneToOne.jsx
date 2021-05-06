@@ -36,8 +36,8 @@ const OrdersOneToOne = () => {
               <td>{order.date.slice(0, 10)}</td>
               <td>{order.totalprice}</td>
               <td>
-                {`${order.deliveryadress.postalCode} ${order.deliveryadress.street}
-                  ${order.deliveryadress.city} ${order.deliveryadress.state}`}
+                {`${order.deliveryaddress.postalCode} ${order.deliveryaddress.street}
+                  ${order.deliveryaddress.city} ${order.deliveryaddress.state}`}
               </td>
             </tr>
           ))}

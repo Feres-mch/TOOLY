@@ -7,6 +7,7 @@ import userRoute from "./routes/userRoute.js";
 import productRoute from "./routes/productRoute.js";
 import claimRoute from "./routes/claimRoute.js";
 import DeliveryRoute from "./routes/deliveryRoute.js";
+import sponsorRoute from "./routes/sponsorRoute.js";
 
 //config
 dotenv.config();
@@ -23,6 +24,7 @@ app.use("/users", userRoute);
 app.use("/products", productRoute);
 app.use("/claims", claimRoute);
 app.use("/deliveries", DeliveryRoute);
+app.use("/sponsors", sponsorRoute);
 
 //port-config
 const port = process.env.PORT || 5000;

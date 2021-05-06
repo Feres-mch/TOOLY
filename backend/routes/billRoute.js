@@ -14,7 +14,7 @@ Router.get("/payed", async (req, res) => {
     billspayed.push({
       reference: bill._id,
       payementMedthod: bill.payementMedthod,
-      billingAdress: bill.billingAdress,
+      billingAddress: bill.billingAddress,
       date: bill.order_Id.date,
       username: bill.order_Id.user_Id.userName,
       price: bill.order_Id.totalPrice,
@@ -34,13 +34,34 @@ Router.get("/notpayed", async (req, res) => {
     billsnotpayed.push({
       reference: bill._id,
       payementMedthod: bill.payementMedthod,
-      billingAdress: bill.billingAdress,
+      billingAddress: bill.billingAddress,
       date: bill.order_Id.date,
       username: bill.order_Id.user_Id.userName,
       price: bill.order_Id.totalPrice,
     });
   });
   res.json(billsnotpayed);
+});
+
+//Add-Bill
+Router.post("/", async (req, res) => {
+  const bill = new Bill({
+    order_Id: req.body.order_Id,
+    payementMedthod: req.body.payementMedthod,
+    payed: req.body.payed,
+    billingAddress: {
+      street: req.body.billingAddress.street,
+      city: req.body.billingAddress.city,
+      state: req.body.billingAddress.state,
+      postalCode: req.body.billingAddress.postalCode,
+    },
+  });
+  try {
+    const addedBill = await bill.save();
+    res.status(201).json(addedBill);
+  } catch (error) {
+    res.status(404).send({ message: error.message });
+  }
 });
 
 //Seed-Method

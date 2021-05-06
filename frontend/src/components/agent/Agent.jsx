@@ -11,6 +11,8 @@ import ClaimNotTreated from "./claimnottreated/ClaimNotTreated";
 import OrdersDone from "./ordersdone/OrdersDone";
 import OrdersOneToOne from "./ordersonetoone/OrdersOneToOne";
 import OrdersDelivery from "./ordersdelivery/OrdersDelivery";
+import SponsorAll from "./sponsorall/SponsorAll";
+import SponsorActive from "./sponsoractive/SponsorActive";
 
 const Agent = () => {
   const { path, url } = useRouteMatch();
@@ -53,6 +55,12 @@ const Agent = () => {
               <Route
                 path={`${url}/deliveryorders`}
                 component={OrdersDelivery}
+                exact
+              />
+              <Route path={`${url}/sponsorall`} component={SponsorAll} exact />
+              <Route
+                path={`${url}/sponsoractive`}
+                component={SponsorActive}
                 exact
               />
             </Switch>

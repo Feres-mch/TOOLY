@@ -1,7 +1,8 @@
 import Agent from "./components/agent/Agent";
 import Home from "./components/home/Home";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
 import HaveProducts from "./components/haveproducts/HaveProducts";
+import WantProducts from "./components/wantproducts/WantProducts";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Route path="/" component={Home} exact />
         <Route path="/agent" component={Agent} />
         <Route path="/ihave" component={HaveProducts} />
+        <Route path="/iwant" component={WantProducts} />
       </Switch>
     </BrowserRouter>
   );
