@@ -40,8 +40,8 @@ const BillsNotPayed = () => {
               <td>{bill.payementMedthod}</td>
               <td>{bill.price}</td>
               <td>
-                {`${bill.billingAdress.postalCode} ${bill.billingAdress.street}
-                ${bill.billingAdress.city} ${bill.billingAdress.state}`}
+                {`${bill.billingAddress.postalCode} ${bill.billingAddress.street}
+                ${bill.billingAddress.city} ${bill.billingAddress.state}`}
               </td>
             </tr>
           ))}

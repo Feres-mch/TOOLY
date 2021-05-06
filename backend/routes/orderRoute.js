@@ -3,6 +3,52 @@ import Order from "../models/Order.js";
 
 const Router = express.Router();
 
+//Get-availability
+Router.get("/available/:id", async (req, res) => {
+  try {
+    let available = true;
+    const orders = await Order.find();
+    if (req.query.startDate === "" || req.query.endDate === "") {
+      available = false;
+    }
+    orders.map((Order) => {
+      Order.products.map((x) => {
+        if (x.product_Id.toString() === req.params.id) {
+          const mongooseEndDateDay = x.endDate.toString().slice(8, 10);
+          const mongooseStartDateDay = x.startDate.toString().slice(8, 10);
+          const startDateDay = req.query.startDate.toString().slice(8, 10);
+          const endDateDay = req.query.endDate.toString().slice(8, 10);
+
+          if (
+            startDateDay < mongooseEndDateDay ||
+            (startDateDay === mongooseStartDateDay &&
+              mongooseEndDateDay === endDateDay)
+          )
+            available = false;
+        }
+      });
+    });
+    res.status(200).send(available);
+  } catch (error) {
+    res.status(404).send({ message: error.message });
+  }
+});
+
+//Add-Order
+Router.post("/", async (req, res) => {
+  const order = new Order({
+    user_Id: req.body.user_Id,
+    products: req.body.products,
+    totalPrice: req.body.totalPrice,
+  });
+  try {
+    const addedorder = await order.save();
+    res.status(201).json(addedorder);
+  } catch (error) {
+    res.status(404).send({ message: error.message });
+  }
+});
+
 //Seed-Method
 Router.post("/seed", async (req, res) => {
   const order1 = new Order({

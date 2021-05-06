@@ -185,7 +185,7 @@ export const AddProduct = () => {
               value={product.category}
               onChange={handleChange}
             >
-              <option value="Gardening">Gardning</option>
+              <option value="Gardening">Gardening</option>
               <option value="DIY">DIY</option>
               <option value="Plombry">Plombry</option>
               <option value="Electricity">Electricity</option>

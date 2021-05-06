@@ -16,7 +16,7 @@ Router.get("/delivred", async (req, res) => {
       username: order.order_Id.user_Id.userName,
       date: order.order_Id.date,
       totalprice: order.order_Id.totalPrice,
-      deliveryadress: order.deliveryAdress,
+      deliveryaddress: order.deliveryAddress,
     });
   });
   res.json(delivred);
@@ -38,7 +38,7 @@ Router.get("/onetoone", async (req, res) => {
       username: order.order_Id.user_Id.userName,
       date: order.order_Id.date,
       totalprice: order.order_Id.totalPrice,
-      deliveryadress: order.deliveryAdress,
+      deliveryaddress: order.deliveryAddress,
     });
   });
   res.json(onetoone);
@@ -58,10 +58,31 @@ Router.get("/delivery", async (req, res) => {
       username: order.order_Id.user_Id.userName,
       date: order.order_Id.date,
       totalprice: order.order_Id.totalPrice,
-      deliveryadress: order.deliveryAdress,
+      deliveryaddress: order.deliveryAddress,
     });
   });
   res.json(delivery);
+});
+
+//Add-Delivery
+Router.post("/", async (req, res) => {
+  const delivery = new Delivery({
+    order_Id: req.body.order_Id,
+    deliveryAddress: {
+      street: req.body.deliveryAddress.street,
+      city: req.body.deliveryAddress.city,
+      state: req.body.deliveryAddress.state,
+      postalCode: req.body.deliveryAddress.postalCode,
+    },
+    deliveryMode: req.body.deliveryMode,
+  });
+
+  try {
+    const addedDelivery = await delivery.save();
+    res.status(201).json(addedDelivery);
+  } catch (error) {
+    res.status(404).send({ message: error.message });
+  }
 });
 
 //Seed-Method

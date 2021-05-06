@@ -3,6 +3,7 @@ import MyProduct from "../myproduct/MyProduct";
 import { Button, Row, Container } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import Axios from "axios";
+import Statistics from "../statistics/Statistics";
 import "./MyProducts.css";
 
 const MyPorducts = () => {
@@ -117,6 +118,7 @@ const MyPorducts = () => {
           ))}
         </Row>
       </Container>
+      <Statistics />
     </>
   );
 };
