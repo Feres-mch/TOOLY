@@ -13,17 +13,19 @@ import "./signup.css";
 
 const SignUp3 = (props) => {
 
-
+   let  picture = localStorage.getItem('image');
+   console.log(props.location.state.address.postalCode)
     let history = useHistory();
     let data;
     function Previous() {
         history.push("/SignUpPage2");
     }
 
-    let profilepic;
+    let profilepic="null";
     let cinpic1;
     let cinpic2;
     let robotTest = "false";
+   
     function fileselect(event) {
 
         let filename = event.target.name
@@ -31,7 +33,7 @@ const SignUp3 = (props) => {
         let reader = new FileReader();
         reader.readAsDataURL(fileList[0]);
         reader.onload = (event) => {
-            console.log(event.target.name)
+            
             if (filename === 'profilpic') {
                 
                 profilepic = event.target.result;
@@ -50,14 +52,20 @@ const SignUp3 = (props) => {
 
         }
 
-        console.log(data);
-
+    
 
     }
 
 
     function signup(e) {
         console.log("robo " + robotTest)
+        console.log(profilepic);
+        if (profilepic ==="null" ){
+            profilepic=picture;
+      
+
+        }
+        console.log(profilepic);
         if (robotTest === "false") {
             alert("you have to  pass by robo test")
         } else {
@@ -82,6 +90,7 @@ const SignUp3 = (props) => {
                 type: "client",
                 verified: "false",
                 images: {
+                    
                     profileImage: profilepic,
                 },
                 identityCard: idcin,

@@ -8,10 +8,12 @@ import "./signup.css";
 
 
 const SignUp2 = (props) => {
-    
-      const  history = useHistory();
 
-   
+    const history = useHistory();
+    console.log(props.location.state.firstname);
+    console.log(props.location.state.lastname);
+    console.log(props.location.state.email);
+
     return (
         <>
 
@@ -52,11 +54,11 @@ const SignUp2 = (props) => {
 
                             </div>
                         </div>
-                        <div className="row ">
 
+                        <div className="row ">
                             <div className=" offset-md-5 col-md-6">
-                                <h6>Email :*</h6>
-                                <input type="text" id="email" className="form-control" placeholder="Email" style={{ width: "350px" }} aria-label="Username" aria-describedby="basic-addon1" />
+                                <h6>Date :*</h6>
+                                <input type="date" id="date" className="form-control" placeholder="username" style={{ width: "350px" }} aria-label="Username" aria-describedby="basic-addon1" />
                             </div>
                         </div>
                         <div className="row ">
@@ -69,35 +71,35 @@ const SignUp2 = (props) => {
                         <div className="row ">
 
                             <div className=" offset-md-5 col-md-6">
-                                <div className="  col-md-1" style={{ display: "inline" }}>
-                                    <h6 style={{ display: "inline" }}>State</h6>
-                                </div>
-                                <div className="offset-md-1  col-md-1" style={{ display: "inline" }}>
-                                    <h6 style={{ display: "inline" }}>City</h6>
-                                </div>
-                                <div className="offset-md-1  col-md-1" style={{ display: "inline" }}>
-                                    <h6 style={{ display: "inline" }}>Postal Code</h6>
-                                </div>
-                            </div>
-                            <div className="input-group offset-md-5 col-md-6">
-                                <input type="text" id="state" className="form-control" placeholder="state" style={{ width: "2px" }} aria-label="Username" aria-describedby="basic-addon1" />
-                                <input type="text" id="city" className="form-control" placeholder="city" style={{ width: "50px" }} aria-label="Username" aria-describedby="basic-addon1" />
-                                <input type="text" id="postal_code" className="form-control" placeholder="postal_code" style={{ width: "50px" }} aria-label="Username" aria-describedby="basic-addon1" />
-                            </div>
-
-
+                                <h6>State :*</h6>
+                                <input type="text" id="state" className="form-control" placeholder="state" style={{ width: "350px" }} aria-label="Username" aria-describedby="basic-addon1" />                            </div>
                         </div>
+                        <div className="row ">
+
+                            <div className=" offset-md-5 col-md-6">
+                                <h6>City :*</h6>
+                                <input type="text" id="city" className="form-control" placeholder="city" style={{ width: "350px" }} aria-label="Username" aria-describedby="basic-addon1" />
+                            </div>
+                        </div>
+                        <div className="row ">
+
+                            <div className=" offset-md-5 col-md-6">
+                                <h6>Zip Code :*</h6>
+                                <input type="text" id="postal_code" className="form-control" placeholder="postal_code" style={{ width: "350px" }} aria-label="Username" aria-describedby="basic-addon1" />
+                            </div>
+                        </div>
+                       
 
                         <br />
                         <div className="row  ">
 
                             <div className=" offset-md-8 col-md-4">
-                            
-                                    <input type="submit" /*onClick={this.Previous} */name="submit" className="btn   login_btn btn-md" style={{ width: "150px", marginLeft: "5px" }} value="Previous" />
-                               
-                                
-                                    <input type="submit" onClick={Next} name="submit" className="btn   login_btn btn-md" style={{ width: "150px", marginLeft: "5px" }} value="Next" />
-                                
+
+                                <input type="submit" /*onClick={this.Previous} */ name="submit" className="btn   login_btn btn-md" style={{ width: "150px", marginLeft: "5px" }} value="Previous" />
+
+
+                                <input type="submit" onClick={Next} name="submit" className="btn   login_btn btn-md" style={{ width: "150px", marginLeft: "5px" }} value="Next" />
+
                             </div>
                         </div>
 
@@ -112,35 +114,35 @@ const SignUp2 = (props) => {
     );
 
 
-   function Next(e)  {
+    function Next(e) {
 
-    e.preventDefault();
-   
-    let data=({
-      firstname: props.location.state.firstname,
-      lastname: props.location.state.lastname,
-      username: props.location.state.username,
-      password : props.location.state.password,
-      birthDate: props.location.state.birthDate,
-      tel : document.getElementById("phone_number").value,
-      email :  document.getElementById("email").value,
-      address:{
-            state:document.getElementById("state").value,
-            city:document.getElementById("city").value,
-           street: document.getElementById("street").value,
-           postalCode: document.getElementById("postal_code").value
-        },
-      
-        type :"simple user",
-    });
- 
-    console.log( data);
-   history.push({
-        pathname: '/SignUpPage3',
-          state: data // your data array of objects
-      })
-  
-  }
+        e.preventDefault();
+
+        let data = ({
+            firstname: props.location.state.firstname,
+            lastname: props.location.state.lastname,
+            username: props.location.state.username,
+            password: props.location.state.password,
+            birthDate: document.getElementById("date").value,
+            tel: document.getElementById("phone_number").value,
+            email: props.location.state.email,
+            address: {
+                state: document.getElementById("state").value,
+                city: document.getElementById("city").value,
+                street: document.getElementById("street").value,
+                postalCode: document.getElementById("postal_code").value
+            },
+
+            type: "simple user",
+        });
+
+        console.log(data);
+        history.push({
+            pathname: '/SignUpPage3',
+            state: data // your data array of objects
+        })
+
+    }
 }
 
 

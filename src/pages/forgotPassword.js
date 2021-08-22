@@ -21,6 +21,12 @@ function reset_password(e){
     password: document.getElementById("password").value,
     rep_password:document.getElementById("rep-password").value,
   }
+  if(document.getElementById("code").value===""){
+    alert("insert ur key");
+  }else
+  if(document.getElementById("code").value!== localStorage.getItem("code")){
+    alert("your key is  incorrect");
+  }else
   if(request.password==="" || request.rep_password===""){
     alert("empty inputs");
   }else if( request.password!==request.rep_password){
@@ -30,7 +36,7 @@ function reset_password(e){
 
   
       alert ("congratulations your password has been changed");
-      
+      localStorage.removeItem("code")
       history.push({
         pathname: '/SignInPage',
       })
@@ -57,7 +63,12 @@ function reset_password(e){
                   <div className="col-md-9 col-lg-8 mx-auto">
                     <h3 className="login-heading mb-4">reset password</h3>
                     <form  >
-
+                    <div className="input-group mb-3">
+                        <div className="input-group-prepend">
+                          <span className="input-group-text" id="basic-addon1">   <Icon.Lock /></span>
+                        </div>
+                        <input type="text" id="code" className="form-control" placeholder="code" aria-label="Email" aria-describedby="basic-addon1" />
+                      </div>
 
                       <div className="input-group mb-3">
                         <div className="input-group-prepend">

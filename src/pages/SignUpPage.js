@@ -21,9 +21,9 @@ const SignUp = (props) => {
       lastname: document.getElementById("lastname").value,
       username: document.getElementById("username").value,
       password: document.getElementById("password").value,
-      birthDate : document.getElementById("date").value,
+      email: document.getElementById("email").value,
     });
-   
+
     if (document.getElementById("conf_password").value === data.password) {
 
       history.push({
@@ -91,23 +91,27 @@ const SignUp = (props) => {
             </div>
             <div className="row ">
 
+
+            </div>
+            <div className="row ">
+
               <div className=" offset-md-5 col-md-6">
-                <h6>Date :*</h6>
-                <input type="date" id="date" className="form-control" placeholder="username" style={{ width: "350px" }} aria-label="Username" aria-describedby="basic-addon1" />
+                <h6>Email :*</h6>
+                <input type="text" id="email" className="form-control" placeholder="Email" style={{ width: "350px" }} aria-label="Username" aria-describedby="basic-addon1" />
               </div>
             </div>
             <div className="row ">
 
               <div className=" offset-md-5 col-md-6">
                 <h6>password :*</h6>
-                <input type="text" id="password" className="form-control" placeholder="password" style={{ width: "350px" }} aria-label="Username" aria-describedby="basic-addon1" />
+                <input type="password" id="password" className="form-control" placeholder="password" style={{ width: "350px" }} aria-label="Username" aria-describedby="basic-addon1" />
               </div>
             </div>
             <div className="row ">
 
               <div className=" offset-md-5 col-md-6">
                 <h6>confirm password :*</h6>
-                <input type="text" id="conf_password" className="form-control" placeholder="confirm password" style={{ width: "350px" }} aria-label="Username" aria-describedby="basic-addon1" />
+                <input type="password" id="conf_password" className="form-control" placeholder="confirm password" style={{ width: "350px" }} aria-label="Username" aria-describedby="basic-addon1" />
               </div>
             </div>
             <br />

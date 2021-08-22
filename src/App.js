@@ -15,11 +15,16 @@ import SignInPage from"./pages/SignInPage";
 import SignUpPage from"./pages/SignUpPage";
 import SignUpPage2 from"./pages/SignUpPage2";
 import SignUpPage3 from"./pages/SignUpPage3";
-
+import DisplayAllUsers from"./pages/displayAllUsers";
 import Profil from"./pages/profil";
 import Editpage from"./pages/editprofil";
-
+import UserRequest from "./pages/userRequest";
+import UserRequestDetails from "./pages/UserRequestDetails";
 import Forgotpassword from "./pages/forgotPassword";
+import OtherUsersProfil from"./pages/otherUsersProfil";
+import QrCode from"./pages/QrCode";
+import ajouterOffre from"./pages/ajouterOffre";
+
 import axios from "axios";
 import './App.css';
 import { AuthContextProvider } from "./components/testAuth";
@@ -59,7 +64,24 @@ const App = () => {
         <Route path="/SignUpPage3" render={(props) =>  <SignUpPage3 {...props} />}>
         
         </Route>
-       
+        <Route path="/allusers" render={(props) =>  < DisplayAllUsers {...props} />}>
+        
+        </Route>
+        <Route path="/userRequest" render={(props) =>  < UserRequest {...props} />}>
+        
+        </Route>
+        <Route path="/userRequestDetails" render={(props) =>  < UserRequestDetails {...props} />}>
+        
+        </Route>
+        <Route path="/qrcode" render={(props) =>  < QrCode {...props} />}>
+        
+        </Route>
+        <Route path="/otherprofil" render={(props) =>  < OtherUsersProfil {...props} />}>
+        
+        </Route>
+        <Route path="/ajouterOffre" render={(props) =>  < ajouterOffre {...props} />}>
+        
+        </Route>
         <Redirect to="/" />
       </Switch>
     </main>
